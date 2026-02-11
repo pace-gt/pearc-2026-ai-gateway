@@ -1,0 +1,15 @@
+[Unit]
+After=postgres.container
+Requires=postgres.container
+
+[Container]
+ContainerName=litellm
+Secret=litellm-master-key,type=env,target=LITELLM_MASTER_KEY
+Secret=database-url,type=env,target=DATABASE_URL
+Environment=STORE_MODEL_IN_DB=True
+Environment=LITELLM_LOG=ERROR
+Environment=LITELLM_MODE=PRODUCTION
+Exec=--config /app/config.yaml --num_workers 8 --ssl_keyfile_path /opt/litellm/litellm.key --ssl_certfile_path /opt/litellm/litellm.crt
+Image=ghcr.io/berriai/litellm-database:main-stable
+Network=host
+Pod=litellm-postgres.pod

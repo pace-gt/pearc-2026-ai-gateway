@@ -1,0 +1,15 @@
+[Unit]
+StartLimitIntervalSec=3
+StartLimitBurst=100
+
+[Pod]
+Network=host
+PodName=litellm-postgres
+Volume=/var/lib/postgresql/data:/var/lib/postgresql/data:Z
+Volume=/var/lib/postgresql/dump:/var/lib/postgresql/dump:Z
+Volume=/opt/litellm/config.yaml:/app/config.yaml
+Volume=/opt/litellm/litellm.key:/opt/litellm/litellm.key
+Volume=/opt/litellm/litellm.crt:/opt/litellm/litellm.crt
+
+[Install]
+WantedBy=default.target

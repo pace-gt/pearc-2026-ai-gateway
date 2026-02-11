@@ -1,0 +1,6 @@
+[Container]
+ContainerName=postgres
+Secret=postgres-password,type=env,target=POSTGRES_PASSWORD
+Image=docker.io/library/postgres:15
+Network=host
+Pod=litellm-postgres.pod
